@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "iostream": "cpp",
+        "utility": "cpp",
+        "cstddef": "cpp"
+    }
+}
