@@ -3,21 +3,19 @@ using namespace std;
 typedef pair<int, int> pii;
 const int mm = 1e9+5;
 int l, n;
-bool arr[mm];
+vector<pii> vc;
 int main() {
-    memset(arr, false, sizeof arr);
     cin >> l >> n;
     for (int i = 0; i < n; i ++) {
         int s, t; cin >> s >> t;
-        for (int j = s; j < t; j++) {
-            arr[j] = true;
-        }
+        vc.push_back({s, t});
     }
-    int ans = 0;
-    for (int i = 0; i < l; i++) {
-        if (!arr[i]) {
-            ans++;
-        }
+    sort(vc.begin(), vc.end());
+    int ans = 0, ma = -1;
+    for (pii u : vc) {
+        ma = max(ma, u.first - ans);
+        ans = max(ans, u.second);
     }
-    cout << ans;
+    ma = max(ma, l-ans);
+    cout << ma;
 }
