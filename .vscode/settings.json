@@ -9,6 +9,18 @@
         "algorithm": "cpp",
         "iostream": "cpp",
         "utility": "cpp",
-        "cstddef": "cpp"
+        "cstddef": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "filesystem": "cpp",
+        "forward_list": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp",
+        "xstring": "cpp",
+        "random": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }

@@ -1,43 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int mm = 20 + 5;
+const int mm = 20 + 1;
 int n, m;
-int a[mm], idx[mm], seg[mm*2];
+int a[(1<<mm)+5], seg[(1<<mm)+5];
 void construct() {
-    for (int i = 1; i <= pow(2, n); i++) {
-        seg[i+(int)pow(2, n)] = a[i];
+    for (int i = 0; i < (1 << n); i++) {
+        seg[i+(1<<n)] = i;
     }
-    for (int i = pow(2, n) - 1; i >= 0; i--) {
-        seg[i] = idx[max(seg[i*2], seg[i*2+1])];
+    for (int i = (1 << n) - 1; i > 0; i--) {
+        seg[i] = (a[seg[2 * i]] > a[seg[2 * i + 1]] ? seg[2 * i] : seg[2 * i + 1]);
     }
 }
-void update(int x, int v) {
-    int temp = x;
-    x = x + pow(2, n);
-    seg[x] = v;
-    while (x > 1) {
-        x /= 2;
-        seg[x] = idx[max(seg[x*2], seg[x*2+1])];    
+void update(int b, int v) {
+    a[b] = v;
+    b += (1 << n);
+    for (int i = b / 2; i > 0; i/=2) {
+        seg[i] = (a[seg[2 * i]] > a[seg[2 * i + 1]] ? seg[2 * i] : seg[2 * i + 1]);
     }
-    a[x] = v;
-    idx[a[x]] = x;
+} 
+int range(int b) {
+    int wins = 0;
+    for (int i = (b + (1 << n))/2; i > 0; i/=2) {
+        if (seg[i] == b) {
+            wins++;
+        }
+    }
+    return wins;
 }
 int main() {
     cin >> n >> m;
-    for (int i = 1; i <= pow(2, n); i++) {
+    for (int i = 0; i < (1 << n); i++) {
         cin >> a[i];
-        idx[a[i]] = i;
     }
     construct();
-    for (int i = 1; i <= m; i++) {
+    for (int i = 0; i < m; i++) {
         char ch; cin >> ch;
         if (ch == 'R') {
-            int pos, ski; cin >> pos >> ski;
+            int pos, ski; cin >> pos >> ski; pos--;
             update(pos, ski);
         } else if (ch == 'W') {
-            
+            cout << seg[1]+1 << '\n';
         } else if (ch == 'S') {
-            int pos; cin >> pos;
+            int pos; cin >> pos; pos--;
+            cout << range(pos) << '\n';
         }
     }
 }

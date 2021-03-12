@@ -3,99 +3,52 @@ using namespace std;
 typedef pair<int, int> pii;
 const int mm = 1e4 + 5;
 int n;
-short grid[mm][mm];
+bool grid[mm][mm];
 vector<pii> cows;
-int main() {
-    memset(grid, 0, sizeof grid);
-    cin >> n;
-    for (int i = 1, x, y; i <= n; i++) {
-        cin >> x >> y; x++; y++;
-        grid[x][y] = 1;
-        cows.push_back({x, y});
-        int times = 0;
-        for (int j = 0; j < cows.size(); j++) {
-            pii u = cows[j];
-            if (grid[u.first][u.second] > 0) {
-                int count = 0;
-                if (grid[u.first-1][u.second] > 0) {
-                    count++; 
-                } 
-                if (grid[u.first+1][u.second] > 0) {
-                    count++;
-                } 
-                if (grid[u.first][u.second-1] > 0) {
-                    count++;
-                } 
-                if (grid[u.first][u.second+1] > 0) {
-                    count++;
-                }
-                if (count == 3) {
-                    if (!grid[u.first-1][u.second]) {
-                        grid[u.first-1][u.second] = 2;
-                        cows.push_back({u.first-1, u.second}); 
-                    } else if (!grid[u.first+1][u.second]) {
-                        grid[u.first+1][u.second] = 2;
-                        cows.push_back({u.first+1, u.second}); 
-                    } else if (!grid[u.first][u.second-1]) {
-                        grid[u.first][u.second-1] = 2;
-                        cows.push_back({u.first, u.second-1}); 
-                    } else if (!grid[u.first][u.second+1]) {
-                        grid[u.first][u.second+1] = 2;
-                        cows.push_back({u.first, u.second+1}); 
-                    }
-                    times++;
-                    j = 0;
-                }
-            }
+queue<pii> q;
+void change(int x, int y) {
+    if (!grid[x][y]) {
+        return;
+    }
+    int adj = 0;
+    adj += grid[x + 1][y];
+    adj += grid[x - 1][y];
+    adj += grid[x][y + 1];
+    adj += grid[x][y - 1];
+    if (adj == 3) {
+        if (!grid[x + 1][y]) {
+            q.push({x + 1, y});
         }
-        for (int j = 0; j < cows.size(); j++) {
-            pii u = cows[j];
-            if (grid[u.first-1][u.second] == 2) {
-                grid[u.first-1][u.second] = 0;
-            } 
-            if (grid[u.first+1][u.second] == 2) {
-                grid[u.first+1][u.second] = 0;
-            } 
-            if (grid[u.first][u.second-1] == 2) {
-                grid[u.first][u.second-1] = 0;
-            } 
-            if (grid[u.first][u.second+1] == 2) {
-                grid[u.first][u.second+1] = 0;
-            }
+        if (!grid[x - 1][y]) {
+            q.push({x - 1, y});
         }
-        cout << times << '\n';
+        if (!grid[x][y + 1]) {
+            q.push({x, y + 1});
+        }
+        if (!grid[x][y - 1]) {
+            q.push({x, y - 1});
+        }
     }
 }
-
-/*
-        int times = 0;
-        for (int j = 0; j < cows.size(); j++) {
-            pii u = cows[j];
-            int count = 0;
-            if (grid[u.first-1][u.second]) {
-                count++; 
-            } 
-            if (grid[u.first+1][u.second]) {
-                count++;
-            } 
-            if (grid[u.first][u.second-1]) {
-                count++;
-            } 
-            if (grid[u.first][u.second+1]) {
-                count++;
+int main() {
+    cin >> n;
+    int cows = 0;
+    for (int i = 1; i <= n; i++) {
+        int x, y; cin >> x >> y; x += 1000; y += 100;
+        q.push({x, y});
+        while (!q.empty()) {
+            pii front = q.front(); q.pop();
+            if (grid[front.first][front.second]) {
+                continue;
             }
-            if (count == 3) {
-                if (!grid[u.first-1][u.second]) {
-                     grid[u.first-1][u.second] = true;
-                } else if (!grid[u.first+1][u.second]) {
-                    grid[u.first+1][u.second] = true;
-                } else if (!grid[u.first][u.second-1]) {
-                    grid[u.first][u.second-1] = true;
-                } else if (!grid[u.first][u.second+1]) {
-                    grid[u.first][u.second+1] = true;
-                }
-                times++;
-            }
+            cows++; 
+            grid[front.first][front.second] = true;
+            change(front.first, front.second);
+            change(front.first + 1, front.second);
+            change(front.first - 1, front.second);
+            change(front.first, front.second + 1);
+            change(front.first, front.second - 1);
         }
-        cout << times << '\n';
-        */
+        cout << cows - i << '\n';
+    }
+}
