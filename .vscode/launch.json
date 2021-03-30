@@ -5,6 +5,41 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch testtemplate",
+            "request": "launch",
+            "mainClass": "testtemplate",
+            "projectName": "DMOJSOLUTIONS_73a859ae"
+        },
+        {
+            "type": "java",
+            "name": "Launch orzbruce5",
+            "request": "launch",
+            "mainClass": "orzbruce5",
+            "projectName": "DMOJSOLUTIONS_73a859ae"
+        },
+        {
+            "type": "java",
+            "name": "Launch ccc02j2",
+            "request": "launch",
+            "mainClass": "ccc02j2",
+            "projectName": "DMOJSOLUTIONS_73a859ae"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "DMOJSOLUTIONS_73a859ae"
+        },
+        {
+            "type": "java",
+            "name": "Launch oly21practice28",
+            "request": "launch",
+            "mainClass": "oly21practice28",
+            "projectName": "DMOJSOLUTIONS_73a859ae"
+        },
+        {
             "name": "g++.exe - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
