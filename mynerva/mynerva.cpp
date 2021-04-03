@@ -6,7 +6,7 @@ int n, m, dis[mm], truedis[mm];
 vector<pii> adj[mm];
 void solve(int end, bool a) {
     memset(dis, 0, sizeof dis);
-    memset(truedis, 0, sizeof dis);
+    memset(truedis, 0, sizeof truedis);
     
 }
 int main() {

@@ -1,22 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int mm = 5000 + 5;
-int n; string s;
-int dp[mm][mm];
+int n; string s, t;
+int dp[2][mm];
 int main() {
-    memset(dp, 0, sizeof dp);
     cin >> n;
     cin >> s;
-    for (int i = 0; i < n; i++) {
-        dp[i][i] = 1;
-    }
-    for (int l = 0; l < n; l++) {
-        for (int r = l; r < n; r++) {
-            if (s[l] == s[r]) {
-                dp[l][r] = dp[l + 1][r - 1];
+    t = s; reverse(t.begin(), t.end());
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (s[i - 1] == t[j - 1]) {
+                dp[(i + 1) % 2][j] = dp[i % 2][j - 1] + 1;
             } else {
-                dp[l][r] += 2;
+                dp[(i + 1) % 2][j] = max(dp[i % 2][j], dp[(i + 1) % 2][j - 1]);
             }
         }
     }
+    cout << n - dp[(n + 1) % 2][n];
 }

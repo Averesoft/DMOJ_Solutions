@@ -5,5 +5,9 @@ int n, k;
 bool a[mm];
 int main() {
     cin >> n >> k;
+    if (n == k) {
+        cout << 0;
+        return 0;
+    }
     
 }
