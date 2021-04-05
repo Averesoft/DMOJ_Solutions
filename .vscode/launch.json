@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch tsoc15c1p1",
+            "request": "launch",
+            "mainClass": "tsoc15c1p1",
+            "projectName": "DMOJSOLUTIONS_73a859ae"
+        },
+        {
+            "type": "java",
             "name": "Launch ccc05s1",
             "request": "launch",
             "mainClass": "ccc05s1",
