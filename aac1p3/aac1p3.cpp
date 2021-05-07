@@ -4,16 +4,17 @@ const int mm = 1e6 + 5;
 int n, x, a[mm];
 int main() {
     cin >> n >> x;
-    if (x == n - 1) {
-        cout << -1;
+    if ((n - x) % 2 != 0) {
+        cout << -1 << '\n';
         return 0;
     }
-    for (int i = 1; i <= n - x - 1; i++) {
-        a[i] = 1;
+    int idx = 0;
+    for (int i = 0; i < (n - x) / 2; i++) {
+        a[idx]++; idx += 2;
     }
-    for (int i = 1; i <= n; i++) {
+    for (int i = 0; i < n; i++) {
         cout << a[i];
-        if (i != n) {
+        if (i != n - 1) {
             cout << ' ';
         }
     }

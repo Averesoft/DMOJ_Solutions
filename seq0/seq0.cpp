@@ -9,9 +9,9 @@ int main() {
         cin >> a[i];
     }
     dp[0] = max((ll)0, a[0]);
-    dp[1] = max(dp[0], max((ll)0, a[1]));
+    dp[1] = max(dp[0], a[1]);
     for (ll i = 2; i <= n; i++) {
-        dp[i] = max(max((ll)0, dp[i]), dp[i - 2] + a[i]);
+        dp[i] = max(dp[i], dp[i - 2] + a[i]);
     }
     cout << dp[n];
 }
