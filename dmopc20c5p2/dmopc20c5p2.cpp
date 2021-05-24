@@ -1,33 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-typedef pair<ll, ll> pii;
+typedef pair<ll, ll> pll;
 const ll mm = 1e6 + 5;
-ll n, m, k = 0;
-vector<pii> vc;
-bool intersections(double i, double j, double x, double y) {
-    return i == floor(i) && j == floor(j) && x == floor(x) && y == floor(y);
+ll n, m, divi, x = 1, y = 1;
+double slope;
+vector<pll> vc;
+bool cmp(ll x, ll y) {
+    ll a = (ll) n * (y - 1), b = (ll) n * y;
+    return a < x * m && b > (x - 1) * m;
 }
-bool cmp(pii a, pii b) {
-    if (a.first == b.first) {
-        return a.second < b.second;
-    }
-    return a.first < b.first;
+ll gcd(ll a, ll b) {
+    return (b == 0 ? a : gcd(b, a % b));
 }
 int main() {
     cin >> n >> m;
-    double slope = (double) (n - 1.0) / (m - 1.0), b = 1 - slope;
-    for (ll i = 1; i <= m; i++) {
-        for (ll j = 1; j <= n; j++) {
-            double x = (i) * slope + b, y = (j - b) / slope;
-            if (((x >= j - 1 && x <= j) || (y >= i - 1 && y <= i)) && !intersections(i, j, x, y)) {
-                k++; vc.push_back({j, i});
-            }
-        } 
+    divi = gcd(n, m);
+    n /= divi; m /= divi;
+    while(x <= n && y <= m) {
+        vc.push_back({x, y});
+        ((x + 1 <= n && cmp(x + 1, y)) ? x++ : y++);
     }
-    sort(vc.begin(), vc.end(), cmp);
-    cout << k << '\n';
-    for (pii a : vc) {
-        cout << a.first << ' ' << a.second << '\n';
+    cout << vc.size() * divi << '\n';
+    for (ll i = 0; i < divi; i++) {
+        for (ll j = 0; j < vc.size(); j++) {
+            cout << vc[j].first + i * n << ' ' << vc[j].second + i * m << '\n';
+        }
     }
 }

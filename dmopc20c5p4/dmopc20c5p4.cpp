@@ -1,31 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int mm = 500 + 5;
-int n, m;
-bool a[mm][mm];
-bool test(int i, int j, int k, int l) {
-    for (int x = i; x < k; i++) {
-        if (a[x][j] != a[x][l]) return 0;
-    }
-    return 1;
-}
+typedef long long ll;
+const int base = 131;
+int N, M; vector<string> a, s; ll ans; unordered_map<ll, int> mp;
 int main() {
-    cin >> n >> m;
-    for (int i = 0; i < n; i++) {
-        string s; cin >> s;
-        for (int j = 0; j < s.size(); j++) {
-            a[i][j] = (s[j] == 'Y' ? 1 : 0);
-        }
+    ios::sync_with_stdio(0); cin.tie(0);
+    cin >> N >> M; s.resize(N);
+    for (int i = 0; i < N; i++) {
+        cin >> s[i];
     }
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            for (int k = i + 1; k < n; k++) {
-                for (int l = j + 1; l < m; l++) {
-                    if (test(i, j, k, l)) sum++;
+    if (N > M) {
+        a.resize(M, string(N, ' '));
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                a[i][j] = s[j][i];
+            }
+        }
+        swap(N, M); swap(a, s);
+    }
+    for (int r1 = 0; r1 < N; r1++) {
+        vector<ll> hsh(M, 0); 
+        for (int r2 = r1 + 1; r2 < N; r2++) {
+            for (int c = 0; c < M; c++) {
+                hsh[c] = hsh[c] * base + s[r2][c];
+            }
+            mp.clear();
+            for (int c = 0; c < M; c++) {
+                if(s[r1][c] == s[r2][c]) {
+                    ans += mp[hsh[c]]; mp[hsh[c]]++;
+                } else {
+                    mp.clear();
                 }
             }
         }
     }
-    cout << sum << '\n';
+    cout << ans << '\n';    
 }

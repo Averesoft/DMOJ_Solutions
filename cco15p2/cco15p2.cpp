@@ -28,5 +28,5 @@ int main() {
     for (ll i = 0; i < (1 << (n - 1)); i++) {
         ans = max(ans, mem(n - 1, i));
     }
-    cout << ans;
+    cout << ans << '\n';
 }

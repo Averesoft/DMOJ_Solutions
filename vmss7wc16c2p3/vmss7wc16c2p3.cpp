@@ -1,15 +1,11 @@
 //OH YOU CAN KEEP TRACK OF INDICES
 #include <bits/stdc++.h>
 using namespace std;
-const int mm = 1000000+5;
-int jef[mm], leo[mm], idx1[mm], idx2[mm];
+const int mm = 1000000 + 5;
+int n, m, jef[mm], leo[mm], idx1[mm], idx2[mm];
 int dp[mm];
 int main() {
-    cin.sync_with_stdio(0);
-    cout.sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    int n, m;
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     cin >> n;
     for (int i = 1; i <= n; i++) {
         cin >> jef[i];
@@ -32,5 +28,5 @@ int main() {
             dp[temp] = idx2[i];
         }
     }
-    cout << ans;   
+    cout << ans;
 }
