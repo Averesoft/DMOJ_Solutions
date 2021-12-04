@@ -96,5 +96,10 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp"
-    }
+    },
+    "java.project.sourcePaths": [
+        "oly18decp4",
+        "hci16jumping",
+        "coci16c3p1"
+    ]
 }

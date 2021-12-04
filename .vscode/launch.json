@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch hci16jumping",
+            "request": "launch",
+            "mainClass": "hci16jumping",
+            "projectName": "DMOJ_Solutions_f5188b47"
+        },
+        {
+            "type": "java",
+            "name": "Launch vmss7wc16c3p2",
+            "request": "launch",
+            "mainClass": "vmss7wc16c3p2",
+            "projectName": "DMOJ_Solutions_f5188b47"
+        },
+        {
             "name": "g++.exe - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
